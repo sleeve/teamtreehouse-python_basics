@@ -4,45 +4,43 @@ TICKET_PRICE = 10
 
 tickets_remaining = 100
 
-# Output how many tickets are remaining using the tickets_remaining variable
-if tickets_remaining > 0:
-    print("There are {} tickets remaining.".format(tickets_remaining))
-else:
-    print("Sorry, no more tickets are available.")
+# run this code continuously until we run out of tickets
+while tickets_remaining > 0:
+    # Output how many tickets are remaining using the tickets_remaining variable
+    if tickets_remaining > 0:
+        print("There are {} tickets remaining.".format(tickets_remaining))
+    else:
+        print("Sorry, no more tickets are available.")
 
-# Gather the user's name and assign it to a new variable
-username = input("What is your name? ")
+    # Gather the user's name and assign it to a new variable
+    username = input("What is your name? ")
 
-# Prompt the user by name and ask how many tickets they would like
-tickets_requested = input("How many tickets would you like, {}? ".format(username))
-tickets_requested = int(tickets_requested)
+    # Prompt the user by name and ask how many tickets they would like
+    tickets_requested = input("How many tickets would you like, {}? ".format(username))
+    tickets_requested = int(tickets_requested)
 
-# Calculate the price (number of tickets multiplied by the price) and assign it to a variable
-amount_due = tickets_requested * TICKET_PRICE
+    # Probably need some logic in here to limit the requested number to tickets that are currently available. So a user can't buy more tickets than we actually have.
 
-# Output the price to the screen
-print("The total due is ${}".format(amount_due))
+    # Calculate the price (number of tickets multiplied by the price) and assign it to a variable
+    amount_due = tickets_requested * TICKET_PRICE
 
-# Prompt user if they want to proceed. Y/N?
-complete_purchase = input("Would you like to complete your purchase? y/n: ")
+    # Output the price to the screen
+    print("The total due is ${}".format(amount_due))
 
-if complete_purchase == "y" or "Y" or "yes" or "YES":
-    complete_purchase = True
-else:
-    complete_purchase = False
+    # Prompt user if they want to proceed. Y/N?
+    complete_purchase = input("Would you like to complete your purchase? y/n: ")
 
-print("complete+purchase={}".format(complete_purchase))
+    if complete_purchase.lower() == "y" or "yes":
+        # TODO: Gather credit card information and process it.
+        print("Thanks {}, you've completed your order of {} tickets for ${}. Enjoy the show!".format(username, tickets_requested, amount_due))
+        tickets_remaining -= tickets_requested
+    else:
+        print("No problem, {}. Thanks anyways for your interest in the show!".format(username))
 
-# If they want to proceed
-if complete_purchase is True:
-    # print out to the screen "SOLD!" to confirm purchase
-    print("Thanks {}, you've completed your order of {} tickets for ${}. Enjoy the show!".format(username, tickets_requested, amount_due))
-    # and then decrement the tickets remaining by the number of tickets purchased
-    tickets_remaining -= tickets_requested
-# Otherwise...
-else:
-    # Thank them by name
-    print("No problem, {}. Thanks anyways for your interest in the show!".format(username))
+# Notify the user that the tickets are sold out
+print("All of the tickets are now sold out.".format(username))
+
+    
 
 
 
